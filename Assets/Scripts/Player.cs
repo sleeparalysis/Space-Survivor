@@ -8,20 +8,23 @@ public class Player : Unit
     protected void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
+
+        /*
         m_Vitality = 1;
-        m_Health = m_Vitality;
         m_Level = 1;
         m_Required = 1;
         m_Experience = 0;
         m_Endurance = 10;
-        m_Stamina = m_Endurance;
         m_Value = 1;
         m_Speed = 0;
         m_Acceleration = 10.0f;
         m_XRange = 33.58f;
         m_YRange = 18.0f;
         m_Rotation = 0.0f;
-        
+        */
+
+        m_Health = m_Vitality;
+        m_Stamina = m_Endurance;
         m_Target = null;
         m_AllowFire = true;
         m_Waiting = false;
@@ -29,7 +32,7 @@ public class Player : Unit
 
     void Start()
     {
-        Level = 99;
+        
     }
 
     private void Update()
@@ -42,7 +45,7 @@ public class Player : Unit
             }
             else
             {
-                StartCoroutine(Reload(m_Endurance / 100));
+                StartCoroutine(Reload(2));
             }
         }
 
@@ -60,7 +63,7 @@ public class Player : Unit
 
     void FixedUpdate()
     {
-        if (m_Health > 0)
+        if (GameManager.Instance.GameOver != true)
         {
             Rotate();
             Constrain();

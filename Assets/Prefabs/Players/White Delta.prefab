@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -174,19 +174,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4651d35da2cad21499996dfc8179957a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ParticleSystem: {fileID: 6044610691775312740, guid: a5d31cbb26401a84f9cfc42cdbae16d4, type: 3}
-  m_Vitality: 1
-  m_Health: 1
+  m_ExplosionParticle: {fileID: 6044610691775312740, guid: a5d31cbb26401a84f9cfc42cdbae16d4, type: 3}
+  m_LevelParticle: {fileID: 6044610691775312740, guid: e68644b62b671d9488d7d884c4ef5380, type: 3}
   m_Level: 1
   m_Experience: 0
   m_Required: 1
+  m_Value: 1
+  m_Vitality: 1
+  m_Health: 1
   m_Endurance: 10
   m_Stamina: 0
-  m_Value: 1
   m_Speed: 0
-  m_Acceleration: 100000
+  m_Acceleration: 20
   m_XRange: 33.56
   m_YRange: 18
   m_Rotation: 0
   m_Target: {fileID: 0}
   m_Artillery: {fileID: 6714029484340793688, guid: 6a5bdd99ff1305449a37269ccf714ed3, type: 3}
+  m_AllowFire: 0
+  m_Waiting: 0

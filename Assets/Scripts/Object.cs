@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Object : MonoBehaviour
 {
-    [SerializeField] protected GameObject m_ParticleSystem;
+    [SerializeField] protected GameObject m_ExplosionParticle;
     [SerializeField] protected int m_Level;
     [SerializeField] protected int m_Experience;
     [SerializeField] protected int m_Required;
@@ -28,19 +28,10 @@ public abstract class Object : MonoBehaviour
         set
         {
             m_Level = value;
-
-            for (int i = 0; i < m_Level; i++)
+            for(int i  = 0; i < m_Level; i++)
             {
-                m_Vitality++;
-                m_Endurance += 10;
-                m_Required++;
-                m_Acceleration++;
-                m_Value++;
+                LevelUp();
             }
-
-            m_Health = m_Vitality;
-            m_Stamina = m_Endurance;
-            m_Experience = 0;
         }
     }
 
@@ -89,11 +80,10 @@ public abstract class Object : MonoBehaviour
     public virtual void LevelUp()
     {
         m_Level++;
-        m_Vitality++;
-        m_Endurance++;
-        m_Required++;
-        m_Acceleration++;
-        m_Value++;
+        m_Vitality = m_Level;
+        m_Endurance = m_Level * 10;
+        m_Required = m_Level;
+        m_Value = m_Level;
 
         m_Health = m_Vitality;
         m_Stamina = m_Endurance;
@@ -103,7 +93,7 @@ public abstract class Object : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-        Explode();
+        Explode(m_ExplosionParticle);
     }
 
     protected void Up()
@@ -140,10 +130,10 @@ public abstract class Object : MonoBehaviour
         m_RigidBody.AddForce(transform.up * -m_Acceleration, ForceMode2D.Force);
     }
 
-    protected void Explode()
+    protected void Explode(GameObject Particles)
     {
-        GameObject Explosion = Instantiate(m_ParticleSystem, transform.position, transform.rotation);
-        ParticleSystem ps = Explosion.GetComponent<ParticleSystem>();
+        GameObject ActiveParticles = Instantiate(Particles, transform.position, transform.rotation);
+        ParticleSystem ps = ActiveParticles.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule psmain = ps.main;
 
         psmain.startColor = gameObject.GetComponent<SpriteRenderer>().color;

@@ -7,6 +7,8 @@ public class Photon : Artillery
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
+
+        /*
         m_Vitality = 1;
         m_Health = m_Vitality;
         m_Level = 1;
@@ -20,10 +22,11 @@ public class Photon : Artillery
         m_XRange = 38.58f;
         m_YRange = 23.0f;
         m_Rotation = 0.0f;
-
         m_Damage = 1.0f;
         m_Cost = 1.0f;
         m_FireRate = 1.0f;
+        */
+
         m_Origin = null;
     }
 

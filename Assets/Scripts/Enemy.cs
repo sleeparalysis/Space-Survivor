@@ -7,6 +7,8 @@ public class Enemy : Unit
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
+
+        /*
         m_Vitality = 1;
         m_Health = m_Vitality;
         m_Level = 1;
@@ -20,15 +22,19 @@ public class Enemy : Unit
         m_XRange = 38.58f;
         m_YRange = 23.0f;
         m_Rotation = 0.0f;
-       
-        m_Target = GameObject.FindWithTag("Player"); ;
+        */
+
+        
+        m_Health = m_Vitality;
+        m_Stamina = m_Endurance;
+        m_Target = GameObject.FindWithTag("Player");
         m_AllowFire = true;
         m_Waiting = false;
     }
 
     void Start()
     {
-        StartCoroutine(Wait(Random.Range(0.25f, 1.0f)));
+        StartCoroutine(Wait(Random.Range(0.25f, 2.0f)));
     }
 
     void Update()
@@ -47,7 +53,7 @@ public class Enemy : Unit
 
     void FixedUpdate()
     {
-        if (m_Health > 0 && m_Target != null)
+        if (GameManager.Instance.GameOver != true && m_Target != null)
         {
             Rotate();
             Forward();
@@ -61,7 +67,7 @@ public class Enemy : Unit
                 }
                 else
                 {
-                    StartCoroutine(Reload(m_Stamina / 10));
+                    StartCoroutine(Reload(2));
                 }
             }
         }

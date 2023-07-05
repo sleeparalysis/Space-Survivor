@@ -65,19 +65,27 @@ public class UIManager : MonoBehaviour
 
     private void Refresh()
     {
-        LevelsText.text = m_Player.Level.ToString();
+        if(m_Player.Health > 0)
+        {
+            LevelsText.text = m_Player.Level.ToString();
 
-        HealthSlider.maxValue = m_Player.Vitality;
-        StaminaSlider.maxValue = m_Player.Endurance;
-        ExperienceSlider.maxValue = m_Player.Required;
+            HealthSlider.maxValue = m_Player.Vitality;
+            StaminaSlider.maxValue = m_Player.Endurance;
+            ExperienceSlider.maxValue = m_Player.Required;
 
-        HealthSlider.value = m_Player.Health;
-        StaminaSlider.value = m_Player.Stamina;
-        ExperienceSlider.value = m_Player.Experience;
+            HealthSlider.value = m_Player.Health;
+            StaminaSlider.value = m_Player.Stamina;
+            ExperienceSlider.value = m_Player.Experience;
 
-        HealthText.text = m_Player.Health.ToString("0") + "/" + m_Player.Vitality;
-        StaminaText.text = m_Player.Stamina + "/" + m_Player.Endurance;
-        ExperienceText.text = m_Player.Experience + "/" + m_Player.Required;
+            HealthText.text = m_Player.Health.ToString("0") + "/" + m_Player.Vitality;
+            StaminaText.text = m_Player.Stamina + "/" + m_Player.Endurance;
+            ExperienceText.text = m_Player.Experience + "/" + m_Player.Required;
+        }
+
+        else
+        {
+            Hide(HudMenu);
+        }
     }
 
     public void Show(GameObject Menu)

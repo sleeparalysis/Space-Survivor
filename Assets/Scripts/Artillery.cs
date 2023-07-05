@@ -10,21 +10,6 @@ public abstract class Artillery : Object
     [SerializeField] protected float m_FireRate;
     protected GameObject m_Origin;
 
-    public override int Level
-    {
-        get { return m_Level; }
-        set
-        {
-            m_Level = value;
-            for (int i = 0; i < m_Level; i++)
-            {
-                m_Rotation += 0.05f;
-                m_Damage += 0.1f;
-                m_FireRate -= 0.0095f;
-            }
-        }
-    }
-
     public float Damage
     {
         get { return m_Damage; }
@@ -49,17 +34,26 @@ public abstract class Artillery : Object
         set { m_Origin = value; }
     }
 
+    private void Update()
+    {
+        if (m_Health <= 0)
+        {
+            Die();
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (m_Health > 0)
+        if (GameManager.Instance.GameOver != true)
         {
             Constrain();
         }
-        else
-        {
-            m_Health = 0;
-            Die();
-        }
+    }
+
+    public override void LevelUp()
+    {
+        m_Level++;
+        m_Acceleration = m_Level;
     }
 
     protected override void Constrain()
@@ -75,7 +69,7 @@ public abstract class Artillery : Object
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null)
+        if (collision != null && collision.gameObject != m_Origin.gameObject)
         {
             Object Target = collision.gameObject.GetComponent<Object>();
             int value = Target.Value;

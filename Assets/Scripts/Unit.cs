@@ -14,10 +14,12 @@ public abstract class Unit : Object
         m_AllowFire = false;
 
         GameObject clone = Instantiate(m_Artillery, transform.position + (transform.up * 1.5f), transform.rotation);
+        Rigidbody2D cloneRb = clone.GetComponent<Rigidbody2D>();
 
         clone.GetComponent<Artillery>().Origin = gameObject;
-        clone.GetComponent<Artillery>().Level = m_Level;
         clone.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
+
+        cloneRb.velocity += m_RigidBody.velocity;
 
         m_Stamina -= clone.GetComponent<Artillery>().Cost;
         float rate = clone.GetComponent<Artillery>().FireRate;
